@@ -18,19 +18,20 @@ def get_available_memory_kb():
                 return int(line.split()[1])
 
 
-uptime_seconds = get_uptime_seconds()
-minutes = uptime_seconds // 60
-seconds = uptime_seconds % 60
-print("Uptime:", minutes, "min", seconds, "s")
+if __name__ == "__main__":
+    uptime_seconds = get_uptime_seconds()
+    minutes = uptime_seconds // 60
+    seconds = uptime_seconds % 60
+    print("Uptime:", minutes, "min", seconds, "s")
 
-total_memory_kb = get_total_memory_kb()
-print("Total RAM:", total_memory_kb, "kB")
+    total_memory_kb = get_total_memory_kb()
+    print("Total RAM:", total_memory_kb, "kB")
 
-available_memory_kb = get_available_memory_kb()
-print("Available RAM:", available_memory_kb, "kB")
+    available_memory_kb = get_available_memory_kb()
+    print("Available RAM:", available_memory_kb, "kB")
 
-used_memory_kb = total_memory_kb - available_memory_kb
-print("Used RAM:", used_memory_kb, "kB")
+    used_memory_kb = total_memory_kb - available_memory_kb
+    print("Used RAM:", used_memory_kb, "kB")
 
-used_memory_percent = used_memory_kb / total_memory_kb * 100
-print("Used RAM percentage:", round(used_memory_percent, 1), "%")
+    used_memory_percent = used_memory_kb / total_memory_kb * 100
+    print("Used RAM percentage:", round(used_memory_percent, 1), "%")
