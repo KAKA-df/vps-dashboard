@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from monitor import get_uptime_seconds, get_memory_usage_percent
 
 app = Flask(__name__)
@@ -7,7 +8,7 @@ app = Flask(__name__)
 def dashboard():
     uptime_seconds = get_uptime_seconds()
     used_memory_percent = get_memory_usage_percent()
-    return f"<h1>Server dashboard</h1><p>Uptime: {uptime_seconds}s.</p><p>RAM usage: {round(used_memory_percent, 1)}%</p>"
+    return render_template('dashboard.html', uptime_seconds=uptime_seconds, used_memory_percent=round(used_memory_percent, 1))
 
 @app.route("/health")
 def ok():
