@@ -37,11 +37,17 @@ def get_cpu_usage_percent():
     return psutil.cpu_percent(interval=1)
 
 
+def format_uptime(uptime_seconds):
+    days = uptime_seconds // 86400
+    hours = uptime_seconds // 3600 % 24
+    minutes = uptime_seconds // 60 % 60
+    seconds = uptime_seconds % 60
+    return f"{days} d {hours} h {minutes} min {seconds} s"
+
+
 if __name__ == "__main__":
     uptime_seconds = get_uptime_seconds()
-    minutes = uptime_seconds // 60
-    seconds = uptime_seconds % 60
-    print("Uptime:", minutes, "min", seconds, "s")
+    print("Uptime:", format_uptime(uptime_seconds))
 
     used_memory_percent = get_memory_usage_percent()
     print("RAM usage:", round(used_memory_percent, 1), "%")
