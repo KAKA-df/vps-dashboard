@@ -1,4 +1,4 @@
-import shutil
+import shutil, psutil
 
 
 def get_uptime_seconds():
@@ -33,6 +33,10 @@ def get_root_disk_usage():
     return shutil.disk_usage("/")
 
 
+def get_cpu_usage_percent():
+    return psutil.cpu_percent(interval=1)
+
+
 if __name__ == "__main__":
     uptime_seconds = get_uptime_seconds()
     minutes = uptime_seconds // 60
@@ -46,7 +50,9 @@ if __name__ == "__main__":
     total_gib = disk_usage.total / 1024 ** 3
     used_gib = disk_usage.used / 1024 ** 3
     free_gib = disk_usage.free / 1024 ** 3
-    print("Total disk:", round(total_gib, 1), "GiB\n"
-          "Used disk:", round(used_gib, 1), "GiB\n"
-          "Free disk:", round(free_gib, 1), "GiB"
-          )
+
+    cpu_usage = get_cpu_usage_percent()    
+    print("Total disk:", round(total_gib, 1), "GiB")
+    print("Used disk:", round(used_gib, 1), "GiB")
+    print("Free disk:", round(free_gib, 1), "GiB")
+    print("CPU usage (1-second sample):", round(cpu_usage, 1), "%")
